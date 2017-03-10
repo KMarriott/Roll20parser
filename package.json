@@ -1,0 +1,19 @@
+{
+  "name": "roll20parsr",
+  "version": "1.0.0",
+  "description": "beginner program to parse roll20 data",
+  "main": "Fullscript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KMarriott/Roll20parser.git"
+  },
+  "author": "KM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KMarriott/Roll20parser/issues"
+  },
+  "homepage": "https://github.com/KMarriott/Roll20parser#readme"
+}
