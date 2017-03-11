@@ -47,52 +47,34 @@ fs.readFile(file, 'utf8', function(err, data) {
 			//cleans up inline rolls
 			$('.sheet-rolltemplate-default').each(function(){
 				$(this).find('td').not(':first').remove()
-				// console.log($(this).find('td').html())
+
+				$td = $(this).find('td')
+				td_html = $td.html().slice($td.html().indexOf("<")-1)
+				td_title = $(td_html).attr('original-title')
+				if(td_title !== undefined){
+					dice.style = td_title.slice(td_title.indexOf("g")+1, td_title.indexOf("=")-1).replace(/\+ 0/g, '').trim()
+				}
+				else{
+					dice.style = 'Problem'
+				}
+
 				span = $(this).find('td').html().match(/\([^\)]+\)/g)
-				console.log(span[0])
-				// title = $(this).attr('title')
-				// var rolljson = {}
+				if($(span)['0']!==undefined){
+					span_parsed = $(span)['0'].slice(1, -1)
+				}
 
-				// if(title === undefined){
-				// 	title = $(this).attr('original-title')
-				// }
 
-				// // console.log(title)
+				span_html = $(span_parsed)
+				dice.roll = span_html.text()
+				dice.result = span_html.html()
+				$td.append("<br>Rolled: " + dice.style + " - " + dice.roll)
+				console.log(dice)
 
-				// if(title !== undefined){
-				// 	// console.log($(this).attr('title'))
-				// 	interiorroll = title.match(/\([^\)]+\)/g)
-
-				// 	// console.log(interiorroll)
-
-				// 	if(interiorroll !== null){
-
-				// 		try{diceres = $(interiorroll[0].slice(1, -1))
-				// 			// console.log(diceres.html())
-				// 			rolljson.diceres = diceres.text()
-				// 			roll_attempt = title.slice(0, title.indexOf("=")-1)
-				// 			roll_attempt = roll_attempt.slice(7)
-				// 			// console.log(roll_attempt)
-				// 		}
-				// 		catch(e){}
-				// 	}
-				// 	rolljson.rollamount = roll_attempt.trim()
-
-				// 		// console.log(rolljson)
-				// 		if(rolljson.diceres === undefined){
-				// 			$(this).append(" (" + rolljson.rollamount.replace(/\+ 0/g, '').trim()+ ")")
-				// 		}
-
-				// 		else
-				// 			$(this).append(" (" + rolljson.rollamount.replace(/\+ 0/g, '').trim() + ") " + "(" + rolljson.diceres + ")")
-
-				// 	}
-					// console.log($(this).text())
 				})
 
 
 
-			// console.log($('body').html())
+			console.log($('body').html())
 
 		})
 })
